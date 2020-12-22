@@ -33,12 +33,13 @@ export default function Signup() {
           async function (result) {
             await database.ref("/admins/" + result.user.uid).set({
               mail: result.user.email,
-              createdAt: Date.now(),
+              createdAt: new Date(),
             });
           }
         );
         history.push("/");
-      } catch {
+      } catch (error) {
+        console.log(error);
         setError("Failed to create an account");
         setLoading(false);
       }
